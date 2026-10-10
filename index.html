@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moda Urbana | Ropa con estilo</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #faf9f8;
+      color: #1e1e1e;
+      line-height: 1.5;
+    }
+
+    /* Contenedor general */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid #eaeaea;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1e1e1e;
+    }
+
+    .logo span {
+      color: #b78b5c;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #3d3d3d;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #b78b5c;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      font-size: 1.2rem;
+      color: #3d3d3d;
+    }
+
+    .header-icons i {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .header-icons i:hover {
+      color: #b78b5c;
+    }
+
+    /* Menú hamburguesa para móvil */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #1e1e1e;
+    }
+
+    /* SLIDER DE BANNERS (principal) */
+    .slider-section {
+      margin: 24px 0 32px;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.15);
+      background-color: #f0ebe6;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+      aspect-ratio: 16 / 7;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Overlay de texto en los slides */
+    .slide-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 10%;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 80%);
+      color: white;
+    }
+
+    .slide-content h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      max-width: 550px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 16px;
+    }
+
+    .slide-content p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      max-width: 450px;
+      opacity: 0.95;
+      font-weight: 400;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #1e1e1e;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      border: 1px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn:hover {
+      background-color: #1e1e1e;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid white;
+      color: white;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: #1e1e1e;
+      border-color: white;
+    }
+
+    /* Controles del slider */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #1e1e1e;
+      transition: all 0.2s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    .slider-btn:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .prev {
+      left: 20px;
+    }
+
+    .next {
+      right: 20px;
+    }
+
+    /* Indicadores (dots) */
+    .slider-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dot.active {
+      background: #ffffff;
+      width: 24px;
+      border-radius: 10px;
+    }
+
+    /* SECCIÓN DE CATEGORÍAS (slider secundario - mini banners) */
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      color: #1e1e1e;
+    }
+
+    .section-sub {
+      color: #6b6b6b;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    .categories-slider {
+      margin: 40px 0 48px;
+    }
+
+    .category-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: #b78b5c #eaeaea;
+    }
+
+    .category-track::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .category-track::-webkit-scrollbar-track {
+      background: #eaeaea;
+      border-radius: 10px;
+    }
+
+    .category-track::-webkit-scrollbar-thumb {
+      background: #b78b5c;
+      border-radius: 10px;
+    }
+
+    .category-card {
+      flex: 0 0 calc(33.333% - 14px);
+      min-width: 200px;
+      scroll-snap-align: start;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4 / 5;
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .category-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .category-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 20px 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* GRID DE PRODUCTOS */
+    .products-section {
+      margin: 60px 0 80px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02);
+      border: 1px solid #efefef;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 24px 32px -12px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
+      border-color: #e0d6cc;
+    }
+
+    .product-img {
+      position: relative;
+      aspect-ratio: 1 / 1.1;
+      overflow: hidden;
+      background: #f4f2f0;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.03);
+    }
+
+    .product-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #b78b5c;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .product-info {
+      padding: 18px 16px 20px;
+    }
+
+    .product-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: #1e1e1e;
+    }
+
+    .product-price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #b78b5c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-price del {
+      font-size: 0.9rem;
+      color: #9e9e9e;
+      font-weight: 400;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1a1a1a;
+      color: #dfdfdf;
+      padding: 48px 0 28px;
+      margin-top: 40px;
+      border-radius: 32px 32px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-col p, .footer-col a {
+      color: #b0b0b0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 2;
+      display: block;
+    }
+
+    .footer-col a:hover {
+      color: #b78b5c;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 18px;
+      font-size: 1.3rem;
+      margin-top: 8px;
+    }
+
+    .social-icons a {
+      color: #b0b0b0;
+    }
+
+    .social-icons a:hover {
+      color: #b78b5c;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 40px;
+      margin-top: 32px;
+      border-top: 1px solid #2c2c2c;
+      color: #7a7a7a;
+      font-size: 0.85rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .category-card {
+        flex: 0 0 calc(50% - 10px);
+      }
+      .slide-content h2 {
+        font-size: 2.6rem;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .header-inner {
+        flex-wrap: wrap;
+      }
+      .menu-toggle {
+        display: block;
+        order: 1;
+      }
+      .logo {
+        order: 2;
+        font-size: 1.6rem;
+      }
+      .header-icons {
+        order: 3;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 18px;
+        padding: 24px 0 12px;
+        order: 4;
+        border-top: 1px solid #eaeaea;
+        margin-top: 12px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .slide-content h2 {
+        font-size: 2rem;
+      }
+      .slide-content p {
+        font-size: 0.95rem;
+      }
+      .btn {
+        padding: 10px 24px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        padding: 0 18px;
+      }
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+      .category-card {
+        flex: 0 0 calc(100% - 10px);
+      }
+      .slider-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      .prev { left: 12px; }
+      .next { right: 12px; }
+      .slide-content h2 {
+        font-size: 1.5rem;
+      }
+      .slide-content p {
+        font-size: 0.8rem;
+        margin-bottom: 14px;
+      }
+      .btn {
+        padding: 8px 18px;
+        font-size: 0.75rem;
+      }
+      .slide {
+        aspect-ratio: 16 / 10;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      .header-icons {
+        gap: 14px;
+      }
+    }
+
+    /* Utilidad */
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="logo">MODA<span>URBANA</span></div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#">Inicio</a>
+        <a href="#">Mujer</a>
+        <a href="#">Hombre</a>
+        <a href="#">Nuevo</a>
+        <a href="#">Ofertas</a>
+      </nav>
+      <div class="header-icons">
+        <i class="fas fa-search"></i>
+        <i class="far fa-heart"></i>
+        <i class="fas fa-shopping-bag"></i>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- SLIDER PRINCIPAL (banners) -->
+    <section class="container slider-section">
+      <div class="slider-container" id="mainSlider">
+        <div class="slider" id="slider">
+          <!-- Slide 1 -->
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2070&auto=format&fit=crop" alt="Moda urbana temporada">
+            <div class="slide-content">
+              <h2>Nueva colección Otoño 2025</h2>
+              <p>Descubre las prendas que marcan tendencia esta temporada.</p>
+              <a href="#" class="btn">Ver colección</a>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Estilo urbano">
+            <div class="slide-content">
+              <h2>Básicos que nunca fallan</h2>
+              <p>Comodidad y estilo para el día a día. Envío gratis desde $50.</p>
+              <a href="#" class="btn btn-outline">Comprar básicos</a>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" alt="Ofertas especiales">
+            <div class="slide-content">
+              <h2>Hasta 40% off en seleccionados</h2>
+              <p>Aprovecha descuentos exclusivos en prendas de temporada.</p>
+              <a href="#" class="btn">Ver ofertas</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles -->
+        <button class="slider-btn prev" id="prevBtn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next" id="nextBtn" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+        
+        <!-- Dots -->
+        <div class="slider-dots" id="dotsContainer">
+          <button class="dot active" data-index="0"></button>
+          <button class="dot" data-index="1"></button>
+          <button class="dot" data-index="2"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDER DE CATEGORÍAS (mini banners) -->
+    <section class="container categories-slider">
+      <h2 class="section-title">Compra por categoría</h2>
+      <p class="section-sub">Encuentra tu estilo en un clic</p>
+      <div class="category-track">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=1887&auto=format&fit=crop" alt="Mujer">
+          <div class="category-label">Mujer</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1506634572416-48cdfe530110?q=80&w=1885&auto=format&fit=crop" alt="Hombre">
+          <div class="category-label">Hombre</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1887&auto=format&fit=crop" alt="Accesorios">
+          <div class="category-label">Accesorios</div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=2070&auto=format&fit=crop" alt="Calzado">
+          <div class="category-label">Calzado</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="container products-section">
+      <h2 class="section-title">Tendencias de la semana</h2>
+      <p class="section-sub">Las prendas más buscadas por nuestra comunidad</p>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1926&auto=format&fit=crop" alt="Chaqueta oversize">
+            <span class="product-tag">Nuevo</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Chaqueta oversize beige</div>
+            <div class="product-price">$89.99 <del>$119.99</del></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1935&auto=format&fit=crop" alt="Jeans rectos">
+            <span class="product-tag">Top ventas</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Jeans rectos tiro alto</div>
+            <div class="product-price">$59.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1964&auto=format&fit=crop" alt="Camiseta algodón">
+            <span class="product-tag">Básico</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Camiseta algodón orgánico</div>
+            <div class="product-price">$24.99 <del>$34.99</del></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1936&auto=format&fit=crop" alt="Blazer estructurado">
+            <span class="product-tag">Premium</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Blazer estructurado</div>
+            <div class="product-price">$129.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1560243563-062bfc001d68?q=80&w=2070&auto=format&fit=crop" alt="Vestido midi">
+            <span class="product-tag">Nuevo</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Vestido midi plisado</div>
+            <div class="product-price">$79.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1608257735440-4a3b2c5e3c1f?q=80&w=1965&auto=format&fit=crop" alt="Sudadera con capucha">
+            <span class="product-tag">Oferta</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Sudadera con capucha</div>
+            <div class="product-price">$49.99 <del>$69.99</del></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=1936&auto=format&fit=crop" alt="Falda plisada">
+            <span class="product-tag">Trend</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Falda plisada satinada</div>
+            <div class="product-price">$45.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=1887&auto=format&fit=crop" alt="Abrigo lana">
+            <span class="product-tag">Premium</span>
+          </div>
+          <div class="product-info">
+            <div class="product-title">Abrigo de lana mezcla</div>
+            <div class="product-price">$189.99 <del>$249.99</del></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>MODA URBANA</h4>
+          <p>Ropa con actitud, diseñada para destacar en la ciudad. Calidad y estilo en cada prenda.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Tienda</h4>
+          <a href="#">Mujer</a>
+          <a href="#">Hombre</a>
+          <a href="#">Accesorios</a>
+          <a href="#">Calzado</a>
+        </div>
+        <div class="footer-col">
+          <h4>Ayuda</h4>
+          <a href="#">Envíos</a>
+          <a href="#">Devoluciones</a>
+          <a href="#">Guía de tallas</a>
+          <a href="#">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Recibe un 10% off en tu primera compra.</p>
+          <a href="#" style="color:#b78b5c; font-weight:500;">Suscríbete →</a>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Moda Urbana. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript para sliders y menú -->
+  <script>
+    (function() {
+      // ---------- SLIDER PRINCIPAL ----------
+      const slider = document.getElementById('slider');
+      const slides = slider.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dots = document.querySelectorAll('.dot');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      function updateSlider() {
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        // Actualizar dots
+        dots.forEach((dot, i) => {
+          if (i === currentIndex) dot.classList.add('active');
+          else dot.classList.remove('active');
+        });
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      // Event listeners
+      nextBtn.addEventListener('click', nextSlide);
+      prevBtn.addEventListener('click', prevSlide);
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          updateSlider();
+        });
+      });
+
+      // Auto-avance cada 6 segundos
+      let autoInterval = setInterval(nextSlide, 6000);
+
+      // Pausar auto-avance al interactuar
+      const sliderContainer = document.getElementById('mainSlider');
+      sliderContainer.addEventListener('mouseenter', () => {
+        clearInterval(autoInterval);
+      });
+      sliderContainer.addEventListener('mouseleave', () => {
+        autoInterval = setInterval(nextSlide, 6000);
+      });
+
+      // Soporte táctil básico (swipe)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      sliderContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 40) nextSlide();
+        else if (touchEndX - touchStartX > 40) prevSlide();
+      }, { passive: true });
+
+      // ---------- MENÚ HAMBURGUESA (responsive) ----------
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      // Cerrar menú al hacer clic en un enlace (opcional)
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+
+      // Ajuste para que los indicadores coincidan con el slide actual
+      window.addEventListener('load', () => {
+        updateSlider();
+      });
+    })();
+  </script>
+</body>
+</html>
